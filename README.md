@@ -11,9 +11,9 @@ This connector provides a collection of utility commands for use in SailPoint wo
 
 All commands are invoked via the SailPoint `invoke` endpoint.
 
-### POST `/api/v1/resource`
+`POST /api/v1/resource`
 
-**Payload Example:**
+**Payload:**
 
 ```json
 {
