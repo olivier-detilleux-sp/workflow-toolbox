@@ -9,7 +9,11 @@ This connector provides a collection of utility commands for use in SailPoint wo
 -   Math operations
 -   Encryption helpers
 
-All commands are invoked via the SailPoint `invoke` endpoint using a payload like:
+All commands are invoked via the SailPoint `invoke` endpoint.
+
+### POST `/api/v1/resource`
+
+**Payload Example:**
 
 ```json
 {
