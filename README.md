@@ -1,4 +1,4 @@
-# Utility Connector for SailPoint IdentityNow
+# Workflow Toolbox for SailPoint Identity Security Cloud
 
 This connector provides a collection of utility commands for use in SailPoint workflows, including:
 
@@ -13,6 +13,8 @@ All commands are invoked via the SailPoint `invoke` endpoint using a payload lik
 
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "<command-name>",
   "input": { /* command-specific input */ },
   "config": {}
@@ -21,20 +23,22 @@ All commands are invoked via the SailPoint `invoke` endpoint using a payload lik
 
 ---
 
-## 📌 Command Reference
+## Command Reference
 
 ---
 
-### 🔤 `util:string:base64-encode`
+### `util:string:base64-encode`
 
 Encodes a string to Base64.
 
 **Payload:**
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "util:string:base64-encode",
   "input": {
-    "text": "hello world"
+    "value": "hello world"
   },
   "config": {}
 }
@@ -43,22 +47,24 @@ Encodes a string to Base64.
 **Response:**
 ```json
 {
-  "encoded": "aGVsbG8gd29ybGQ="
+  "result": "aGVsbG8gd29ybGQ="
 }
 ```
 
 ---
 
-### 🔓 `util:string:base64-decode`
+### `util:string:base64-decode`
 
 Decodes a Base64 string to plain text.
 
 **Payload:**
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "util:string:base64-decode",
   "input": {
-    "encoded": "aGVsbG8gd29ybGQ="
+    "value": "aGVsbG8gd29ybGQ="
   },
   "config": {}
 }
@@ -67,22 +73,24 @@ Decodes a Base64 string to plain text.
 **Response:**
 ```json
 {
-  "text": "hello world"
+  "result": "hello world"
 }
 ```
 
 ---
 
-### 🔢 `util:string:to-number`
+### `util:string:to-number`
 
 Converts a string to an integer.
 
 **Payload:**
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "util:string:to-number",
   "input": {
-    "text": "42"
+    "value": "42"
   },
   "config": {}
 }
@@ -91,20 +99,103 @@ Converts a string to an integer.
 **Response:**
 ```json
 {
-  "number": 42
+  "result": 42
 }
 ```
 
 ---
 
-### ➗ `util:number:divide`
+### `util:math:add`
+
+Add `a` and `b`.
+
+**Payload:**
+```json
+{
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
+  "type": "util:math:add",
+  "input": {
+    "a": 10,
+    "b": 2
+  },
+  "config": {}
+}
+```
+
+**Response:**
+```json
+{
+  "result": 12
+}
+```
+
+---
+
+### `util:math:substract`
+
+Substract `b` from `a`.
+
+**Payload:**
+```json
+{
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
+  "type": "util:math:substract",
+  "input": {
+    "a": 10,
+    "b": 2
+  },
+  "config": {}
+}
+```
+
+**Response:**
+```json
+{
+  "result": 8
+}
+```
+
+---
+
+### `util:math:multiply`
+
+Multiply `a` by `b`.
+
+**Payload:**
+```json
+{
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
+  "type": "util:math:multiply",
+  "input": {
+    "a": 10,
+    "b": 2
+  },
+  "config": {}
+}
+```
+
+**Response:**
+```json
+{
+  "result": 20
+}
+```
+
+---
+
+### `util:math:divide`
 
 Divides `a` by `b`.
 
 **Payload:**
 ```json
 {
-  "type": "util:number:divide",
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
+  "type": "util:math:divide",
   "input": {
     "a": 10,
     "b": 2
@@ -122,13 +213,15 @@ Divides `a` by `b`.
 
 ---
 
-### 🗓️ `util:date:diff-from-now`
+### `util:date:diff-from-now`
 
 Returns the number of full days between the given date and the current date.
 
 **Payload:**
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "util:date:diff-from-now",
   "input": {
     "date": "2024-05-01T00:00:00Z"
@@ -146,13 +239,15 @@ Returns the number of full days between the given date and the current date.
 
 ---
 
-### 🧮 `util:array:join`
+### `util:array:join`
 
 Concatenates elements of an array with a given delimiter.
 
 **Payload:**
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "util:array:join",
   "input": {
     "items": ["apple", "banana", "cherry"],
@@ -171,13 +266,15 @@ Concatenates elements of an array with a given delimiter.
 
 ---
 
-### 📅 `util:date:to-iso8601`
+### `util:date:to-iso8601`
 
 Parses a date from a custom format and returns it in ISO 8601 format.
 
 **Payload:**
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "util:date:to-iso8601",
   "input": {
     "date": "02/06/2025",
@@ -190,13 +287,13 @@ Parses a date from a custom format and returns it in ISO 8601 format.
 **Response:**
 ```json
 {
-  "iso": "2025-06-02T00:00:00.000Z"
+  "result": "2025-06-02T00:00:00.000Z"
 }
 ```
 
 ---
 
-### 🔐 `util:string:encrypt`
+### `util:string:encrypt`
 
 Encrypts a string using a symmetric key (e.g., AES).
 
@@ -205,6 +302,8 @@ Encrypts a string using a symmetric key (e.g., AES).
 **Payload:**
 ```json
 {
+  "connectorRef": "<connector-id>",
+  "tag": "latest",
   "type": "util:string:encrypt",
   "input": {
     "text": "mySecretPassword",
@@ -223,35 +322,18 @@ Encrypts a string using a symmetric key (e.g., AES).
 
 ---
 
-## 🧪 Testing
+## Testing
 
-To test a command via API or IdentityNow workflow step, use the `invoke` connector operation and pass the corresponding payload.
-
----
-
-## 📂 Project Structure
-
-Typical layout:
-
-```
-src/
-  array/
-    join.ts
-  date/
-    diffFromNow.ts
-    toIso8601.ts
-  number/
-    divide.ts
-  string/
-    base64Encode.ts
-    base64Decode.ts
-    encrypt.ts
-    toNumber.ts
-index.ts
-```
+To test a command via API or Identity Security Cloud workflow step, use the `invoke` connector operation and pass the corresponding payload.
 
 ---
 
-## 📞 Need Help?
+## Want to add your own command?
+
+Simply add a new command to the util.ts file and register it in the index.ts file using the naming convention: util:<type>:<operation>
+
+---
+
+## Need Help?
 
 Reach out in SailPoint Developer Community or raise an issue in this repo if you encounter problems with specific formats or use cases.
