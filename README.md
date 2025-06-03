@@ -235,7 +235,7 @@ Divides `a` by `b`.
 
 ### `util:date:diff-from-now`
 
-Returns the number of full days between the given date and the current date.
+Returns the number of full days between the given date and the current date. This can be useful when getting a date from a date picker in a form and then use it in a manage access action. Manage access action does not support date but number of days / weeks. This command will calculate the number of days. You can then define a variable to concatenate that number of days and "d" so it can be used in manage access action.
 
 **Payload:**
 
