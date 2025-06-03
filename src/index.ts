@@ -14,19 +14,15 @@ export const connector = async () => {
 
     return createConnector()
         .command(
-            'util:string:toInt',
-            async (context: Context, input: { value: string }, res: Response<{ number: number }>) => {
+            'util:string:to-number',
+            async (context: Context, input: { value: string }, res: Response<{ result: number }>) => {
                 res.send(await util.toIntCommand(input.value))
             }
         )
         .command(
-            'util:password:encrypt',
-            async (
-                context: Context,
-                input: { key: string; password: string },
-                res: Response<{ encrypted: string }>
-            ) => {
-                res.send(await util.encryptPasswordCommand(input.key, input.password))
+            'util:string:encrypt',
+            async (context: Context, input: { text: string; key: string }, res: Response<{ encrypted: string }>) => {
+                res.send(await util.encryptStringCommand(input.text, input.key))
             }
         )
         .command(
@@ -65,7 +61,7 @@ export const connector = async () => {
         )
         .command(
             'util:date:diff-from-now',
-            async (context: Context, input: { date: string }, res: Response<{ result: string }>) => {
+            async (context: Context, input: { date: string }, res: Response<{ days: number }>) => {
                 res.send(await util.dateDiffFromNowCommand(input.date))
             }
         )

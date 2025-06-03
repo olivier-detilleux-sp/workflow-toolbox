@@ -5,13 +5,13 @@ import { DateTime } from 'luxon'
 export class Util {
     constructor() {}
 
-    async encryptPasswordCommand(key: string, password: string): Promise<any> {
+    async encryptStringCommand(text: string, key: string): Promise<any> {
         const publicKeyDer = Buffer.from(key, 'base64')
         const publicKey = new NodeRSA(publicKeyDer, 'pkcs8-public-der', {
             encryptionScheme: 'pkcs1',
         })
 
-        const encrypted = publicKey.encrypt(password, 'base64')
+        const encrypted = publicKey.encrypt(text, 'base64')
 
         return { result: encrypted }
     }
@@ -73,9 +73,8 @@ export class Util {
 
         // Convert to full days (rounded down)
         const days = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-        const result = days + 'd'
 
-        return { result: result }
+        return { days: days }
     }
 
     async toISO8601Command(date: string, format: string): Promise<any> {
